@@ -1,0 +1,87 @@
+using System;
+namespace ConsoleApp7
+{
+    class First
+    {
+        Random rnd = new Random();
+        private int[] array;
+        private int _length;
+        private int _middle;
+        private int[] lowerarray;
+        private int[] norepeatarray;
+        public First(int length, bool qwer = false)
+        {
+            _length = length;
+            array = new int[_length];
+            if (!qwer)
+            {
+                for (int i = 0; i < _length; i++)
+                {
+                    array[i] = int.Parse(Console.ReadLine());
+                }
+            }
+            else
+            {
+                for (int i = 0; i < _length; i++)
+                {
+                    array[i] = rnd.Next(-200, 200);
+                }
+            }
+            Console.WriteLine(array);
+        }
+
+        public First()
+        {
+            Console.WriteLine("Массив: " + array);
+            Console.WriteLine("Среднее арифметическое: " + _middle);
+            Console.WriteLine("Массив с элементами меньше 100 по модулю: " + lowerarray);
+            Console.WriteLine("Массив без повторений: " + norepeatarray);
+
+        }
+
+        public void FindMiddle()
+        {
+            _middle = 0;
+            for (int i = 0; i < _length; i++)
+            {
+                _middle += array[i];
+            }
+            _middle = _middle / _length;
+        }
+
+        public void OnlyLower()
+        {
+            lowerarray = new int[_length];
+            for(int i = 0; i<_length; i++)
+            {
+                if((array[i] < 100) && (array[i] > -100))
+                {
+                    lowerarray[i] = array[i];
+                }
+            }
+        }
+
+        public void NoRepeat()
+        {
+            norepeatarray = new int[_length];
+            int r = 0;
+            for (int i = 0; i < _length; i++)
+            {
+                int c = array[i];
+                for (int j = 0; j < _length; j++)
+                {
+                    if (i != j && c == array[j])
+                    {
+                        array[j] = 0;
+                        norepeatarray[r] = c;
+                    }
+                    else
+                    {
+                        norepeatarray[r] = c;
+                    }
+                }
+                r++;
+            }
+        }
+    }
+}
